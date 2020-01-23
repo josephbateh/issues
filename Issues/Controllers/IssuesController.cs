@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Issues.Models;
 using Issues.Repositories;
@@ -18,6 +19,12 @@ namespace Issues.Controllers
     {
       _repository = repository;
       _logger = logger;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<Issue>>> GetAll()
+    {
+      return Ok(await _repository.GetAll());
     }
 
     [HttpPost]
