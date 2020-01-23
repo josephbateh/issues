@@ -22,12 +22,12 @@ namespace Issues
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddTransient<IIssueRepository, IssueRepository>();
-      services.AddDbContext<IssueContext>(opt => opt.UseInMemoryDatabase("Issues"));
+      services.AddDbContext<IssueContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Default")));
       services.AddControllers();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IssueContext issueContext)
     {
       if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
@@ -38,6 +38,8 @@ namespace Issues
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+      issueContext.Database.EnsureCreated();
     }
   }
 }
