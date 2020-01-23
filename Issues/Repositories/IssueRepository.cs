@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Issues.Models;
@@ -24,6 +25,20 @@ namespace Issues.Repositories
     public async Task<List<Issue>> GetAll()
     {
       return await _context.Issues.ToListAsync();
+    }
+
+    public async Task<Issue> GetOne(Guid id)
+    {
+      return await _context.Issues.FirstOrDefaultAsync(issue => issue.Id == id);
+    }
+
+    public async Task<Issue> Increment(Guid id)
+    {
+      var issue = await GetOne(id);
+      issue.Count += 1;
+      _context.Issues.Update(issue);
+      await _context.SaveChangesAsync();
+      return issue;
     }
   }
 }

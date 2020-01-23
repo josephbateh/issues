@@ -33,5 +33,17 @@ namespace Issues.Controllers
       var issue = new Issue {Name = name, Added = DateTime.UtcNow, Count = 0, Id = Guid.NewGuid()};
       return Ok(await _repository.Insert(issue));
     }
+
+    [HttpPost("{id}")]
+    public async Task<ActionResult<Issue>> Increment(Guid id)
+    {
+      return Ok(await _repository.Increment(id));
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Issue>> GetOne(Guid id)
+    {
+      return Ok(await _repository.GetOne(id));
+    }
   }
 }
