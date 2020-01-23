@@ -29,6 +29,12 @@ namespace Issues
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IssueContext issueContext)
     {
+      app.UseCors(builder =>
+      {
+        builder.WithOrigins("https://localhost:5001", "http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+          .AllowAnyOrigin();
+      });
+
       if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
       app.UseHttpsRedirection();
