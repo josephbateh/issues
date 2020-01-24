@@ -40,5 +40,13 @@ namespace Issues.Repositories
       await _context.SaveChangesAsync();
       return issue;
     }
+
+    public async Task<Issue> DeleteOne(Guid id)
+    {
+      var issue = await GetOne(id);
+      _context.Issues.Remove(issue);
+      await _context.SaveChangesAsync();
+      return issue;
+    }
   }
 }

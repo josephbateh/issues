@@ -45,5 +45,11 @@ namespace Issues.Controllers
     {
       return Ok(await _repository.GetOne(id));
     }
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<Issue>> DeleteOne(Guid id)
+    {
+      return Ok(await _repository.DeleteOne(id));
+    }
   }
 }

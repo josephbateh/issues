@@ -14,5 +14,7 @@ namespace Issues.Repositories
     Task<Issue> GetOne(Guid id);
 
     Task<Issue> Increment(Guid id);
+    
+    Task<Issue> DeleteOne(Guid id);
   }
 }
