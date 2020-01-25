@@ -14,5 +14,4 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS runtime
 WORKDIR /app
 COPY --from=build /app/Issues/out ./
-EXPOSE 80
 ENTRYPOINT ["dotnet", "Issues.dll"]
