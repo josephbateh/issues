@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Issues
@@ -13,7 +14,8 @@ namespace Issues
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
       return Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+        .ConfigureAppConfiguration((hostingContext, config) => { config.AddEnvironmentVariables("NCC_"); });
     }
   }
 }
