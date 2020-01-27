@@ -31,7 +31,9 @@ namespace Issues
     {
       app.UseCors(builder =>
       {
-        builder.WithOrigins("https://localhost:5001", "http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+        builder
+          .AllowAnyMethod()
+          .AllowAnyHeader()
           .AllowAnyOrigin();
       });
 
